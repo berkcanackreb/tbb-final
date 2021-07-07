@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: tbbpython
-          image: berkcanackreb/tbb-bitirme:tbbpython
+          image: berkcanackreb/tbb-bitirme:v$DOCKER_BUILD_NUMBER
           ports:
             - containerPort: 5001
           env:
