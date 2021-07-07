@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysql-pv-prod
+  namespace: prod
+  labels:
+    type: local
+spec:
+  storageClassName: manual-prod
+  capacity:
+    storage: 0.5Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/opt/mydb-prod"

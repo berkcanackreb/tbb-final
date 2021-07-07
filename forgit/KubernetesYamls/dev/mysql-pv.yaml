@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysql-pv-dev
+  namespace: dev
+  labels:
+    type: local
+spec:
+  storageClassName: manual-dev
+  capacity:
+    storage: 0.5Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/opt/mydb-dev"
