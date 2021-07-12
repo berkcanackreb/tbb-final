@@ -1,0 +1,9 @@
+---
+
+- name: kubectl version
+  shell: "kubectl version "
+  register: version
+
+- debug:
+    msg: "{{ version }}"    
+

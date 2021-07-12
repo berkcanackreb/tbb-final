@@ -1,0 +1,18 @@
+---
+
+- name: check "{{ path_file }}"
+  stat:
+    path: "{{ path_file }}"
+  register: vp
+
+- debug:
+    msg: "{{ vp }}"
+
+- name: cat "{{ path_file }}"
+  shell: cat "{{ path_file }}"
+  register: fp
+  when: vp.stat.pw_name is defined and vp.stat.pw_name
+
+- name: output command
+  debug: 
+    msg: "{{ fp.stdout_lines }}"

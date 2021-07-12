@@ -1,0 +1,9 @@
+---
+
+- name: docker version
+  shell: "docker -v"
+  register: version
+
+- debug:
+    msg: "{{ version }}"
+         

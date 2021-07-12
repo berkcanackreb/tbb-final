@@ -1,0 +1,9 @@
+---
+
+- name: debian rsyslog kurulumu
+  apt:
+    name: rsyslog
+    state: latest
+  notify: 
+    - rsyslog_restart  
+
