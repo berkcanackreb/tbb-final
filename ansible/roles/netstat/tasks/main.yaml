@@ -1,18 +1,21 @@
 ---
 
-- name: check "{{ path_file }}"
-  stat:
-    path: "{{ path_file }}"
-  register: vp
+- name: install netstat
+  apt:
+    name: net-tools
+    state: latest
 
-- debug:
-    msg: "{{ vp }}"
+- name: Gather facts on listening ports
+  listen_ports_facts:
 
-- name: cat "{{ path_file }}"
-  shell: cat "{{ path_file }}"
-  register: fp
-  when: vp.stat.pw_name is defined and vp.stat.pw_name
+- name: List TCP ports
+  ansible.builtin.debug:
+    msg: "{{ ansible_facts.tcp_listen  | map(attribute='port') | sort | list }}"
 
-- name: output command
-  debug: 
-    msg: "{{ fp.stdout_lines }}"
+- name: List UDP ports
+  ansible.builtin.debug:
+    msg: "{{ ansible_facts.udp_listen | map(attribute='port') | sort | list }}"
+
+- name: List all ports
+  ansible.builtin.debug:
+    msg: "{{ (ansible_facts.tcp_listen + ansible_facts.udp_listen) | map(attribute='port') | unique | sort | list }}"
